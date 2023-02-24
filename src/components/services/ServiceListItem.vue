@@ -9,17 +9,6 @@ interface Props {
 const props = defineProps<Props>()
 
 const cssClasses = computed(() => {
-  const classes = [
-    'rounded',
-    'border-2',
-    'p-4',
-    'flex',
-    'flex-col',
-    'items-center',
-    'cursor-pointer',
-    'w-full'
-  ]
-
   const newClasses = [
     'border-blue',
     'bg-light-gray',
@@ -32,17 +21,12 @@ const cssClasses = computed(() => {
     'bg-light-orange',
   ]
 
-  const extraClasses = props.type === 'new' ? newClasses : openClasses
-
-  return [
-    ...classes,
-    ...extraClasses,
-  ]
+  return props.type === 'new' ? newClasses : openClasses
 })
 </script>
 
 <template>
-  <button :class="cssClasses">
+  <button class="rounded border-2 p-4 flex flex-col items-center cursor-pointer w-full" :class="cssClasses">
     <span>
       <slot />
     </span>
