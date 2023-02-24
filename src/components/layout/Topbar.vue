@@ -14,7 +14,7 @@ import Button from '../basic/Button.vue';
         Logo
       </div>
       <div>
-        <Button label="Encerrar" theme="primary" />
+        <Button label="Fechar conta" theme="primary" />
       </div>
     </nav>
   </header>

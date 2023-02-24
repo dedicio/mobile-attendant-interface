@@ -1,6 +1,6 @@
 <script setup lang='ts'>
-import ServiceListItemOpen from './ServiceListItemOpen.vue';
-import ServiceListItemNew from './ServiceListItemNew.vue';
+import ServiceListItemOpen from './ServiceListItemOpen.vue'
+import ServiceListItemNew from './ServiceListItemNew.vue'
 </script>
 
 <template>
