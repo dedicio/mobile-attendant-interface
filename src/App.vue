@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Login from './views/Login.vue'
+import Services from './views/Services.vue'
 </script>
 
-<template>
-  <main class="w-full lg:w-[56rem] min-h-screen bg-white">
-    <Login />
-  </main>
+<template >
+  <div class="flex justify-center bg-light-gray min-w-full">
+    <Services />
+  </div>
 </template>
