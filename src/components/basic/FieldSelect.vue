@@ -1,24 +1,20 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import Select from "./Select.vue";
 
 type StringOrNumber = string | number
 
 interface Props {
-  type?: string
+  label: string
   modelValue?: StringOrNumber
-  placeholder?: string
+  required?: boolean
 }
 
 interface Emits {
   (e: 'update:modelValue', value?: StringOrNumber): void
 }
 
-const props = withDefaults(
-  defineProps<Props>(),
-  {
-    type: 'text',
-  }
-)
+const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 
 const value = computed({
@@ -29,12 +25,12 @@ const value = computed({
     emit('update:modelValue', value)
   }
 })
+
 </script>
 
 <template>
-  <input
-    :type="type"
-    :placeholder="placeholder"
-    v-model="value"
-    class="border-blue rounded w-full border p-1" />
+  <div class="my-2">
+    <label>{{ label }}</label>
+    <Select v-model="value" />
+  </div>
 </template>

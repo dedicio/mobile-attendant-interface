@@ -1,15 +1,32 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import Input from "./Input.vue";
 
+type StringOrNumber = string | number
+
 interface Props {
-  type?: string
   label: string
-  value?: [string, number]
+  type?: string
+  modelValue?: StringOrNumber
   required?: boolean
   placeholder?: string
 }
 
-defineProps<Props>()
+interface Emits {
+  (e: 'update:modelValue', value?: StringOrNumber): void
+}
+
+const props = defineProps<Props>()
+const emit = defineEmits<Emits>()
+
+const value = computed({
+  get() {
+    return props.modelValue
+  },
+  set(value) {
+    emit('update:modelValue', value)
+  }
+})
 
 </script>
 
@@ -17,8 +34,8 @@ defineProps<Props>()
   <div class="my-2">
     <label>{{ label }}</label>
     <Input
+      v-model="value"
       :type="type"
-      :value="value"
       :placeholder="placeholder" />
   </div>
 </template>
