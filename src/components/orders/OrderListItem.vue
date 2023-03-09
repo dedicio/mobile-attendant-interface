@@ -8,6 +8,7 @@ const orders: Order[] = [
     client: 'abcs',
     items: [
       {
+        id: '123',
         name: 'Salada',
         observation: 'Observação',
         status: 'done'
