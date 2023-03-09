@@ -3,7 +3,7 @@ import NavbarItem from './NavbarItem.vue';
 
 const services = [
   {
-    label: 'Serviços',
+    label: 'Comandas',
     url: '',
     icon: '',
   },
