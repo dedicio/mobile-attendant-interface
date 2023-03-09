@@ -1,9 +1,11 @@
 <script setup lang='ts'>
 import Button from '../basic/Button.vue';
 
-const emit = defineEmits<{
+interface Emits {
   (e: 'close'): void
-}>()
+}
+
+const emit = defineEmits<Emits>()
 
 const close = () => {
   emit('close')
