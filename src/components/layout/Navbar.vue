@@ -3,20 +3,25 @@ import NavbarItem from './NavbarItem.vue';
 
 const services = [
   {
-    label: 'Comandas',
-    url: '',
+    label: 'Mesas',
+    url: '/positions',
     icon: '',
   },
   {
     label: 'Pedidos',
-    url: '',
+    url: '/orders',
     icon: '',
   },
   {
-    label: 'Usuário',
-    url: '',
+    label: 'Produtos',
+    url: '/products',
     icon: '',
-  },
+  }
+  // {
+  //   label: 'Usuário',
+  //   url: '/users',
+  //   icon: '',
+  // },
 ]
 </script>
 

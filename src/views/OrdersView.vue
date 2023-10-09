@@ -7,6 +7,6 @@ import OrderList from '../components/orders/OrderList.vue'
 <template>
   <DefaultLayout>
     <PageTitle title="Pedidos" />
-    <OrderList  />
+    <OrderList />
   </DefaultLayout>
 </template>

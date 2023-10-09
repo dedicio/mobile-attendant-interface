@@ -1,9 +1,9 @@
 <script setup lang='ts'>
-import EmptyLayout from '../components/layout/Empty.vue'
+import DefaultLayout from '../components/layout/Default.vue'
 </script>
 
 <template>
-  <EmptyLayout>
+  <DefaultLayout>
     <div>Home</div>
-  </EmptyLayout>
+  </DefaultLayout>
 </template>
