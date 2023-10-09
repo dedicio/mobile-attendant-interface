@@ -1,17 +1,17 @@
 <script setup lang='ts'>
 import Button from '../basic/Button.vue';
-
+import Logo from './Logo.vue';
 
 </script>
 
 <template>
   <header class="fixed flex justify-center left-0 top-0 w-full bg-light-gray h-14">
     <nav class="flex justify-between w-full lg:w-[56rem] p-2">
-      <div>
+      <!-- <div>
         <Button label="Voltar" />
-      </div>
+      </div> -->
       <div>
-        Logo
+        <Logo></Logo>
       </div>
       <div>
         <Button label="Fechar conta" theme="primary" />
