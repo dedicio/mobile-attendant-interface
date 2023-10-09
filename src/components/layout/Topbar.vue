@@ -1,7 +1,13 @@
 <script setup lang='ts'>
 import Button from '../basic/Button.vue';
 import Logo from './Logo.vue';
+import { useAuthStore } from '../../stores'
 
+const authStore = useAuthStore()
+
+function logout() {
+  authStore.logout()
+}
 </script>
 
 <template>
@@ -14,7 +20,10 @@ import Logo from './Logo.vue';
         <Logo></Logo>
       </div>
       <div>
-        <Button label="Fechar conta" theme="primary" />
+        <Button
+          label="Sair"
+          @click="logout">
+        </Button>
       </div>
     </nav>
   </header>

@@ -1,7 +1,7 @@
 <template>
-    <a
-        href="#"
+    <RouterLink
+        to="/"
         class="text-2xl font-bold uppercase">
         Sisgares
-    </a>
+    </RouterLink>
 </template>

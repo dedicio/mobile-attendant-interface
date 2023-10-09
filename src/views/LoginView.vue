@@ -19,8 +19,8 @@ function onSubmit() {
 
 <template>
   <EmptyLayout>
-    <section class="flex flex-col justify-center items-center min-h-screen min-w-full">
-      <div class="w-96">
+    <section class="flex flex-col justify-center items-center min-h-screen min-w-full p-2">
+      <div class="w-96 max-w-full">
         <Field
           v-model="email"
           label="E-mail" />

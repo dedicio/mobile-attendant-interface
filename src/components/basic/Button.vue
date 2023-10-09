@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { router } from '../../routes';
 
 interface Props {
   theme?: string
   label: string
   full?: boolean
+  to?: string
 }
 
 const props = defineProps<Props>()
@@ -38,10 +40,18 @@ const classes = computed(() => {
 
   return all
 })
+
+function goTo() {
+  if (props.to) {
+    router.push(props.to)
+  }
+}
 </script>
 
 <template>
-  <button :class="classes">
+  <button
+    :class="classes"
+    @click="goTo">
     {{ label }}
   </button>
 </template>
