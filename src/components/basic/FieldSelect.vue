@@ -4,9 +4,15 @@ import Select from "./Select.vue";
 
 type StringOrNumber = string | number
 
+interface Option {
+  label: string,
+  id: string,
+}
+
 interface Props {
   label: string
   modelValue?: StringOrNumber
+  options: Option[],
   required?: boolean
 }
 
@@ -31,6 +37,8 @@ const value = computed({
 <template>
   <div class="my-2">
     <label>{{ label }}</label>
-    <Select v-model="value" />
+    <Select
+      v-model="value"
+      :options="options" />
   </div>
 </template>

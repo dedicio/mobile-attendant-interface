@@ -2,9 +2,13 @@ import { useAuthStore } from '../stores';
 
 type RequestMethods = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
-type Headers = {
+type AuthHeaders = {
+    Authorization?: string,
+    'X-Company-ID'?: string
+}
+
+type Headers = AuthHeaders & {
     'Content-Type'?: string,
-    Authorization?: string
 };
 
 type RequestOptions = {
@@ -13,7 +17,7 @@ type RequestOptions = {
     body?: string
 };
 
-export const fetchWrapper = {
+export const api = {
     get: request('GET'),
     post: request('POST'),
     put: request('PUT'),
@@ -34,12 +38,15 @@ function request(method: RequestMethods) {
     }
 }
 
-function authHeader(url: string) {
+function authHeader(url: string): AuthHeaders {
     const { user } = useAuthStore();
     const isLoggedIn = !!user?.token;
     const isApiUrl = url.startsWith(import.meta.env.VITE_API_URL);
     if (isLoggedIn && isApiUrl) {
-        return { Authorization: `Bearer ${user.token}` };
+        return {
+            Authorization: `Bearer ${user.token}`,
+            'X-Company-ID': user.company_id,
+        };
     } else {
         return {};
     }

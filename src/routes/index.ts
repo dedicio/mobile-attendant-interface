@@ -13,6 +13,7 @@ export const router = createRouter({
         { path: '/orders', component: () => import('../views/OrdersView.vue') },
         { path: '/checks', component: () => import('../views/ChecksView.vue') },
         { path: '/positions', component: () => import('../views/PositionsView.vue') },
+        { path: '/admin', component: () => import('../views/AdminView.vue') },
     ]
 })
 
