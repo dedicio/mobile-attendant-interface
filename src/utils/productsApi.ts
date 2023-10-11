@@ -25,7 +25,15 @@ export async function getProducts(): Promise<IProduct[]> {
 }
 
 export async function createProduct(product: IProductRequest): Promise<IProductResponse> {
-  const { item } = await api.post(API_URL, product);
+  validateProductRequest(product);
+  const payload = {
+    name: product.name,
+    description: product.description,
+    price: product.price,
+    image: product.image,
+    category_id: product.categoryId,
+  }
+  const item = await api.post(API_URL, payload);
 
   return {
     id: item.id,
@@ -35,4 +43,12 @@ export async function createProduct(product: IProductRequest): Promise<IProductR
     image: item.image,
     categoryId: item.categoryId,
   };
+}
+
+function validateProductRequest(product: IProductRequest) {
+  const { name, price } = product;
+
+  if (!name || !price) {
+    throw new Error('Os campos nome e preço são obrigatórios');
+  }
 }

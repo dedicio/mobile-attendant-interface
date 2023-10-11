@@ -30,9 +30,7 @@ import Button from '../components/basic/Button.vue';
         to="/products"
         class="mb-2">
     </Button>
-    <br>
-    <br>
-    <p class="mb-4">
+    <p class="mt-4 mb-4">
         Para acessar a área administrativa, clique no botão abaixo:
     </p>
     <Button

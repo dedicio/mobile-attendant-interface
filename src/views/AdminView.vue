@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import DefaultLayout from '../components/layout/Default.vue'
 import Button from '../components/basic/Button.vue'
@@ -20,13 +20,13 @@ const toggleCategoryRegisterModal = () => showCategoryRegisterModal.value = !sho
         <p class="mb-4">
             Faça os cadastros clicando nos botões abaixo:
         </p>
-        <div>
+        <div class="mb-2">
             <Button
                 label="Cadastrar Produto"
                 full
                 @click="openProductRegisterModal"></Button>
         </div>
-        <div>
+        <div class="mb-2">
             <Button
                 label="Cadastrar Categoria"
                 full

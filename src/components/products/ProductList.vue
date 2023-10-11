@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, computed } from 'vue';
 import { ICategory } from './ICategory';
 import { IProduct } from './IProduct';
 import ProductListFilter from './ProductListFilter.vue';
 import ProductListItem from './ProductListItem.vue';
+import Loading from '../basic/Loading.vue';
 import * as productsApi from '../../utils/productsApi';
 import * as categoriesApi from '../../utils/categoriesApi';
 
@@ -18,16 +19,22 @@ onMounted(async () => {
   products.push(...receivedProducts);
 });
 
-const filter = (value: string) => console.log(value);
+const isLoading = computed(() => products.length === 0);
 
+const filter = (value: string) => console.log(value);
 </script>
 
 <template>
-  <ProductListFilter :categories="categories" @on-filter="filter" />
-  <div>
-    <ProductListItem
-      v-for="product in products"
-      :key="product.id"
-      :product="product" />
+  <div v-if="isLoading" class="flex justify-center items-center h-full">
+    <Loading></Loading>
   </div>
+  <template v-else>
+    <ProductListFilter :categories="categories" @on-filter="filter" />
+    <div>
+      <ProductListItem
+        v-for="product in products"
+        :key="product.id"
+        :product="product" />
+    </div>
+  </template>
 </template>
