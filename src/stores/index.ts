@@ -16,7 +16,7 @@ export type AuthActions = {
     logout: () => void
 }
 
-const apiUrl: string = `${import.meta.env.VITE_API_URL}/account`
+const apiUrl: string = `${import.meta.env.VITE_API_URL}/public/account`
 
 export const useAuthStore = defineStore<'auth', AuthState, {}, AuthActions> ({
     id: 'auth',

@@ -25,7 +25,7 @@ export const api = {
 };
 
 function request(method: RequestMethods) {
-    return (url: string, body: object) => {
+    return (url: string, body?: object) => {
         const requestOptions: RequestOptions = {
             method,
             headers: authHeader(url)

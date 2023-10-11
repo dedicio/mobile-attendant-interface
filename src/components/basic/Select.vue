@@ -1,21 +1,19 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { IOption } from './IOption'
 
 type StringOrNumber = string | number
 
 interface Props {
   modelValue?: StringOrNumber,
-  options: Option[],
+  options: IOption[],
 }
 
 interface Emits {
   (e: 'update:modelValue', value?: StringOrNumber): void
 }
 
-interface Option {
-  label: string,
-  id: string,
-}
+
 
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()

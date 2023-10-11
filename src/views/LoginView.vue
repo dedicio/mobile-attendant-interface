@@ -11,8 +11,6 @@ const password = ref('');
 const authStore = useAuthStore();
 
 function onSubmit() {
-  console.log('login' , email.value, password.value);
-  
   return authStore.login(email.value, password.value);
 }
 </script>

@@ -1,39 +1,22 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { reactive, onMounted } from 'vue';
 import { ICategory } from './ICategory';
-import { IProduct } from './IProduct'
+import { IProduct } from './IProduct';
 import ProductListFilter from './ProductListFilter.vue';
-import ProductListItem from './ProductListItem.vue'
+import ProductListItem from './ProductListItem.vue';
+import * as productsApi from '../../utils/productsApi';
+import * as categoriesApi from '../../utils/categoriesApi';
 
-const products: IProduct[] = reactive([
-  {
-    id: '123',
-    name: 'Hamburguer',
-    price: 20.34,
-    image: 'url da image',
-    category: 'Lanche',
-    description: 'Hamburguer de 120g, mussarela, tomate, maionese e pão com gergelim',
-  },
-  {
-    id: '456',
-    name: 'Batata frita',
-    price: 16.20,
-    image: 'url da image',
-    category: 'Lanche',
-    description: 'Batatas canoa com cebolinha',
-  }
-])
+const products: IProduct[] = reactive([]);
+const categories: ICategory[] = reactive([]);
 
-const categories: ICategory[] = reactive([
-  {
-    id: 'first',
-    name: 'Lanches',
-  },
-  {
-    id: 'second',
-    name: 'Bebidas',
-  }
-]);
+onMounted(async () => {
+  const receivedProducts: IProduct[] = await productsApi.getProducts();
+  const receivedCategories: ICategory[] = await categoriesApi.getCategories();
+
+  categories.push(...receivedCategories);
+  products.push(...receivedProducts);
+});
 
 const filter = (value: string) => console.log(value);
 

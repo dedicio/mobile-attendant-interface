@@ -3,10 +3,15 @@ import { ref } from 'vue';
 import DefaultLayout from '../components/layout/Default.vue'
 import Button from '../components/basic/Button.vue'
 import ProductRegisterOverlay from '../components/products/ProductRegisterOverlay.vue'
+import CategoryRegisterOverlay from '../components/products/CategoryRegisterOverlay.vue'
 
 const showProductRegisterModal = ref(false);
 const openProductRegisterModal = () => showProductRegisterModal.value = true;
 const toggleProductRegisterModal = () => showProductRegisterModal.value = !showProductRegisterModal.value;
+
+const showCategoryRegisterModal = ref(false);
+const openCategoryRegisterModal = () => showCategoryRegisterModal.value = true;
+const toggleCategoryRegisterModal = () => showCategoryRegisterModal.value = !showCategoryRegisterModal.value;
 </script>
 
 <template>
@@ -21,8 +26,17 @@ const toggleProductRegisterModal = () => showProductRegisterModal.value = !showP
                 full
                 @click="openProductRegisterModal"></Button>
         </div>
+        <div>
+            <Button
+                label="Cadastrar Categoria"
+                full
+                @click="openCategoryRegisterModal"></Button>
+        </div>
     </DefaultLayout>
     <ProductRegisterOverlay
         v-if="showProductRegisterModal"
         @close="toggleProductRegisterModal" />
+    <CategoryRegisterOverlay
+        v-if="showCategoryRegisterModal"
+        @close="toggleCategoryRegisterModal" />
 </template>

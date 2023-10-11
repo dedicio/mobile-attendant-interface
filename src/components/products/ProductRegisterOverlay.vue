@@ -1,40 +1,33 @@
 <script setup lang='ts'>
-import { reactive } from 'vue';
-import Field from '../basic/Field.vue'
+import { reactive, onMounted } from 'vue';
+import { ICategory } from './ICategory';
+import Field from '../basic/Field.vue';
 import FieldSelect from '../basic/FieldSelect.vue';
-import OverlayContent from '../layout/OverlayContent.vue'
+import OverlayContent from '../layout/OverlayContent.vue';
+import { IOption } from '../basic/IOption';
+import { IProductRequest } from './IProduct';
+import * as categoriesApi from '../../utils/categoriesApi';
+import * as productsApi from '../../utils/productsApi';
 
-interface Product {
-  name: string,
-  description?: string,
-  price: number,
-  image?: string,
-  categoryId: string,
-}
+const categories: IOption[] = reactive([]);
 
-const categories = [
-  {
-    id: '1',
-    label: 'Bebidas',
-  },
-  {
-    id: '2',
-    label: 'Lanches',
-  },
-  {
-    id: '3',
-    label: 'Sobremesas',
-  },
-];
+onMounted(async () => {
+  const receivedCategories: ICategory[] = await categoriesApi.getCategories();
+  const options = receivedCategories.map(category => ({
+    id: category.id,
+    label: category.name,
+  }));
+  categories.push(...options);
+});
 
-const product: Product = reactive({
+const product: IProductRequest = reactive({
     name: '',
     price: 0,
     categoryId: '',
 });
 
 function save() {
-  console.log('save', product);
+  return productsApi.createProduct(product);
 }
 </script>
 
