@@ -3,6 +3,7 @@ import Button from '../basic/Button.vue';
 
 interface Emits {
   (e: 'close'): void
+  (e: 'save'): void
 }
 
 const emit = defineEmits<Emits>()
@@ -12,8 +13,7 @@ const close = () => {
 }
 
 const save = () => {
-  console.log('salvou')
-  emit('close')
+  emit('save')
 }
 </script>
 

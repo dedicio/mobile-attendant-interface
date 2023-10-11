@@ -4,7 +4,8 @@ import { computed } from 'vue'
 type StringOrNumber = string | number
 
 interface Props {
-  modelValue?: StringOrNumber
+  modelValue?: StringOrNumber,
+  options: Option[],
 }
 
 interface Emits {
@@ -27,21 +28,6 @@ const value = computed({
     emit('update:modelValue', value)
   }
 })
-
-const options: Option[] = [
-  {
-    label: 'Mesa 1',
-    id: '1',
-  },
-  {
-    label: 'Mesa 3',
-    id: '3',
-  },
-  {
-    label: 'Mesa 6',
-    id: '6',
-  }
-]
 </script>
           
 <template>

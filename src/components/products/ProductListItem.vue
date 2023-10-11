@@ -24,7 +24,7 @@ const openProductDetails = () => {
 
 <template>
   <div
-    class="grid gap-4 grid-cols-5 shadow-md rounded p-4 mb-4 cursor-pointer" @click="openProductDetails">
+    class="flex flex-col md:grid gap-4 md:grid-cols-5 shadow-md rounded p-4 mb-4 cursor-pointer" @click="openProductDetails">
     <div class="col-span-1 bg-slate-400 rounded overflow-hidden">
       {{ product.image }}
     </div>
@@ -32,7 +32,7 @@ const openProductDetails = () => {
       <h3 class="text-2xl">{{ product.name }}</h3>
       <p>{{ product.description }}</p>
     </div>
-    <div class="col-span-1 text-right">
+    <div class="col-span-1 text-right flex justify-between">
       <span class="text-2xl block">{{ currencyPrice }}</span>
       <button class="mt-2" @click.stop="addProduct">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

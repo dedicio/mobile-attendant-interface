@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { router } from '../routes'
-import { fetchWrapper } from '../utils/api'
+import { api } from '../utils/api'
 
 export type AuthState = {
     user: {
@@ -33,7 +33,7 @@ export const useAuthStore = defineStore<'auth', AuthState, {}, AuthActions> ({
     },
     actions: {
         async login(email: string, password: string) {
-            const user = await fetchWrapper.post(`${apiUrl}/login`, { email, password })
+            const user = await api.post(`${apiUrl}/login`, { email, password })
 
             this.user = user
 

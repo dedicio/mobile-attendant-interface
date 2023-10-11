@@ -10,10 +10,12 @@ defineProps<Props>()
 
 <template>
   <li class="flex-grow text-center p-2">
-    <a :href="url" class="flex w-full justify-center items-center h-full align-middle rounded border uppercase font-bold">
+    <RouterLink
+      :to="url"
+      class="flex w-full justify-center items-center h-full align-middle rounded border uppercase font-bold">
       <span>
         {{ label }}
       </span>
-    </a>
+    </RouterLink>
   </li>
 </template>

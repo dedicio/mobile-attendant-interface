@@ -8,7 +8,12 @@ export const router = createRouter({
     linkActiveClass: 'active',
     routes: [
         { path: '/', component: HomeView },
-        { path: '/login', component: LoginView }
+        { path: '/login', component: LoginView },
+        { path: '/products', component: () => import('../views/ProductsView.vue') },
+        { path: '/orders', component: () => import('../views/OrdersView.vue') },
+        { path: '/checks', component: () => import('../views/ChecksView.vue') },
+        { path: '/positions', component: () => import('../views/PositionsView.vue') },
+        { path: '/admin', component: () => import('../views/AdminView.vue') },
     ]
 })
 
