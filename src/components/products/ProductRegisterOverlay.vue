@@ -72,6 +72,7 @@ function save() {
         :theme="notification.type"
         class="mt-2 mb-4" />
       <section class="flex flex-col justify-center bg-white rounded">
+        <h3 class="py-2 px-4 border-b font-semibold">Novo Produto</h3>
         <div class=" w-full py-2 px-4">
           <Field
             v-model="product.name"

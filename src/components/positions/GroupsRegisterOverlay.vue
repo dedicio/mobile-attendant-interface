@@ -4,8 +4,8 @@ import Field from '../basic/Field.vue';
 import OverlayContent from '../layout/OverlayContent.vue';
 import Loading from '../basic/Loading.vue';
 import Notification from '../basic/Notification.vue';
-import * as categoriesApi from '../../utils/categoriesApi';
-import { ICategoryRequest } from './ICategory';
+import * as groupsApi from '../../utils/groupsApi';
+import { IGroupRequest } from './IGroup';
 
 type Type = 'info' | 'success' | 'error'
 
@@ -17,18 +17,18 @@ interface Notification {
 const isLoading = ref(false);
 const notification = reactive<Notification>({});
 
-const category: ICategoryRequest = reactive({
+const group: IGroupRequest = reactive({
     name: '',
 });
 
 function save() {
   isLoading.value = true;
-  return categoriesApi
-    .createCategory(category)
+  return groupsApi
+    .createGroup(group)
     .then(() => {
       notification.message = 'Categoria cadastrada com sucesso!';
       notification.type = 'success';
-      category.name = '';
+      group.name = '';
     })
     .catch((error) => {
       const message = 'Erro ao cadastrar categoria!'
@@ -54,10 +54,10 @@ function save() {
         class="mt-2 mb-4" />
       <section
         class="flex flex-col justify-center bg-white rounded">
-        <h3 class="py-2 px-4 border-b font-semibold">Nova Categoria</h3>
+        <h3 class="py-2 px-4 border-b font-semibold">Novo Tipo de Atendimento</h3>
         <div class=" w-full py-2 px-4">
           <Field
-            v-model="category.name"
+            v-model="group.name"
             label="Nome" />
         </div>
       </section>
