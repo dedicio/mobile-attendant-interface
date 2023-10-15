@@ -1,14 +1,21 @@
-export type Status = 'open' | 'done' | 'delivered'
+export type Status = 'open' | 'pending' | 'paid' | 'canceled'
 
-export interface OrderItem {
+export interface IOrderItem {
   id: string
-  name: string
-  observation?: string 
+  product: string
+  quantity: number
+  price: number
+}
+
+export interface IOrder {
+  id: string,
+  positionId: string,
+  items?: IOrderItem[],
   status: Status
 }
 
-export interface Order {
-  id: string,
-  client: string,
-  items: OrderItem[]
+export interface IOrderRequest {
+  positionId: string,
+  items?: IOrderItem[],
+  status: Status
 }

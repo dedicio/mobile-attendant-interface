@@ -10,6 +10,15 @@ export const router = createRouter({
         { path: '/', component: HomeView },
         { path: '/login', component: LoginView },
         { path: '/products', component: () => import('../views/ProductsView.vue') },
+        { 
+            path: '/orders/new',
+            component: () => import('../views/OrderView.vue'),
+        },
+        { 
+            path: '/orders/:id',
+            component: () => import('../views/OrderView.vue'),
+            props: true,
+        },
         { path: '/orders', component: () => import('../views/OrdersView.vue') },
         { path: '/checks', component: () => import('../views/ChecksView.vue') },
         { path: '/positions', component: () => import('../views/PositionsView.vue') },
@@ -37,7 +46,7 @@ router.beforeEach(async (to) => {
     }
 
     if (to.meta.permissions) {
-        const hasPermission = to.meta.permissions.includes(auth.user?.level)
+        const hasPermission = to?.meta?.permissions.includes(auth.user?.level)
 
         if (!hasPermission) {
             return '/'

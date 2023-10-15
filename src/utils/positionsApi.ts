@@ -23,6 +23,8 @@ export async function createPosition(position: IPositionRequest): Promise<IPosit
     validatePosition(position);
     const payload = {
       name: position.name,
+      group_id: position.groupId,
+      description: position.description,
     }
     const item = await api.post(API_URL, payload);
 
@@ -34,10 +36,21 @@ export async function createPosition(position: IPositionRequest): Promise<IPosit
     };
 }
 
-function validatePosition(position: IPositionRequest) {
-    const { name } = position;
+export async function getPositionById(id: string): Promise<IPosition> {
+  const item = await api.get(`${API_URL}/${id}`);
 
-    if (!name) {
-      throw new Error('O campo nome é obrigatório');
+  return {
+    id: item.id,
+    name: item.name,
+    description: item.description,
+    groupId: item.groupId,
+  };
+}
+
+function validatePosition(position: IPositionRequest) {
+    const { name, groupId } = position;
+
+    if (!name || !groupId) {
+      throw new Error('O campo nome e tipo de atendimento são obrigatórios');
     }
 }

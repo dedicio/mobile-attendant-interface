@@ -1,37 +1,34 @@
 <script setup lang='ts'>
 import { computed } from 'vue'
+import { PositionWithOrder } from './IPosition';
+import PositionsListItemNew from './PositionsListItemNew.vue';
+import PositionsListItemOpen from './PositionsListItemOpen.vue';
+import { router } from '../../routes';
 
 interface Props {
-  label: string
-  type: 'new' | 'open'
+  position: PositionWithOrder
 }
 
 const props = defineProps<Props>()
+const isOpen = computed(() => props.position.order?.status === 'open')
 
-const cssClasses = computed(() => {
-  const newClasses = [
-    'border-blue',
-    'bg-light-gray',
-    'border-dashed',
-    'text-blue'
-  ]
-
-  const openClasses = [
-    'border-orange',
-    'bg-light-orange',
-  ]
-
-  return props.type === 'new' ? newClasses : openClasses
-})
+const editOrder = () => {
+  const orderId = props.position.order?.orderId
+  const url = orderId ? `/orders/${orderId}` : '/orders/new'
+  router.push(url)
+}
 </script>
 
 <template>
-  <button class="rounded border-2 p-4 flex flex-col items-center cursor-pointer w-full" :class="cssClasses">
-    <span>
-      <slot />
-    </span>
-    <span>
-      {{ label }}
-    </span>
-  </button>
+  <PositionsListItemOpen
+    v-if="isOpen"
+    @click="editOrder">
+    {{ props.position.name }}
+  </PositionsListItemOpen>
+  <PositionsListItemNew
+    v-else
+    :position="props.position"
+    @click="editOrder">
+    {{ props.position.name }}
+  </PositionsListItemNew>
 </template>
