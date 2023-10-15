@@ -13,18 +13,34 @@ export const router = createRouter({
         { path: '/orders', component: () => import('../views/OrdersView.vue') },
         { path: '/checks', component: () => import('../views/ChecksView.vue') },
         { path: '/positions', component: () => import('../views/PositionsView.vue') },
-        { path: '/admin', component: () => import('../views/AdminView.vue') },
+        {
+            path: '/admin',
+            component: () => import('../views/AdminView.vue'),
+            meta: {
+                permissions: ['Administrador'],
+            },
+        },
     ]
 })
 
 router.beforeEach(async (to) => {
-    // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = ['/login']
+    const publicPages = [
+        '/login',
+        '/register',
+    ]
     const authRequired = !publicPages.includes(to.path)
     const auth: Store<'auth', AuthState, {}, AuthActions> = useAuthStore()
 
     if (authRequired && !auth.user) {
         auth.returnUrl = to.fullPath
         return '/login'
+    }
+
+    if (to.meta.permissions) {
+        const hasPermission = to.meta.permissions.includes(auth.user?.level)
+
+        if (!hasPermission) {
+            return '/'
+        }
     }
 })

@@ -2,10 +2,15 @@
 import { ref } from 'vue';
 import DefaultLayout from '../components/layout/Default.vue'
 import Button from '../components/basic/Button.vue'
+import UserRegisterOverlay from '../components/users/UserRegisterOverlay.vue'
 import ProductRegisterOverlay from '../components/products/ProductRegisterOverlay.vue'
 import CategoryRegisterOverlay from '../components/products/CategoryRegisterOverlay.vue'
 import GroupsRegisterOverlay from '../components/positions/GroupsRegisterOverlay.vue'
 import PositionsRegisterOverlay from '../components/positions/PositionsRegisterOverlay.vue'
+
+const showUserRegisterModal = ref(false);
+const openUserRegisterModal = () => showUserRegisterModal.value = true;
+const toggleUserRegisterModal = () => showUserRegisterModal.value = !showUserRegisterModal.value;
 
 const showProductRegisterModal = ref(false);
 const openProductRegisterModal = () => showProductRegisterModal.value = true;
@@ -32,6 +37,12 @@ const togglePositionRegisterModal = () => showPositionRegisterModal.value = !sho
         </p>
         <div class="mb-2">
             <Button
+                label="Cadastrar Usuário"
+                full
+                @click="openUserRegisterModal"></Button>
+        </div>
+        <div class="mb-2">
+            <Button
                 label="Cadastrar Produto"
                 full
                 @click="openProductRegisterModal"></Button>
@@ -55,6 +66,9 @@ const togglePositionRegisterModal = () => showPositionRegisterModal.value = !sho
                 @click="openPositionRegisterModal"></Button>
         </div>
     </DefaultLayout>
+    <UserRegisterOverlay
+        v-if="showUserRegisterModal"
+        @close="toggleUserRegisterModal" />
     <ProductRegisterOverlay
         v-if="showProductRegisterModal"
         @close="toggleProductRegisterModal" />

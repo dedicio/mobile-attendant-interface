@@ -1,6 +1,13 @@
 <script setup lang='ts'>
+import { computed } from 'vue';
+import { Store } from 'pinia'
+import { useAuthStore, AuthState, AuthActions } from '../stores'
 import DefaultLayout from '../components/layout/Default.vue'
 import Button from '../components/basic/Button.vue';
+
+const auth: Store<'auth', AuthState, {}, AuthActions> = useAuthStore()
+
+const hasAdminPermission = computed(() => auth.user?.level === 'Administrador')
 </script>
 
 <template>
@@ -30,15 +37,17 @@ import Button from '../components/basic/Button.vue';
         to="/products"
         class="mb-2">
     </Button>
-    <p class="mt-4 mb-4">
-        Para acessar a área administrativa, clique no botão abaixo:
-    </p>
-    <Button
-        label="Cadastros"
-        theme="secondary"
-        full
-        to="/admin"
-        class="mb-2">
-    </Button>
+    <template v-if="hasAdminPermission">
+        <p class="mt-4 mb-4">
+            Para acessar a área administrativa, clique no botão abaixo:
+        </p>
+        <Button
+            label="Cadastros"
+            theme="secondary"
+            full
+            to="/admin"
+            class="mb-2">
+        </Button>
+    </template>
   </DefaultLayout>
 </template>

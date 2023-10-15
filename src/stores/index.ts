@@ -6,6 +6,8 @@ export type AuthState = {
     user: {
         token: string,
         id: string,
+        name: string,
+        level: string,
         company_id: string,
     } | null,
     returnUrl: string | null

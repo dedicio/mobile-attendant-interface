@@ -19,8 +19,9 @@ const filter = () => {
 </script>
 
 <template>
-  <li class="py-2 px-4 uppercase bg-yellow cursor-pointer ml-px first:ml-0 first:rounded-l last:rounded-r"
-  @click="filter">
+  <li
+    class="py-2 px-4 uppercase bg-yellow cursor-pointer ml-px first:ml-0 first:rounded-l last:rounded-r"
+    @click="filter">
     {{ category.name }}
   </li>
 </template>

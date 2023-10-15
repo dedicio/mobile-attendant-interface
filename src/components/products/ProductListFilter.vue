@@ -19,7 +19,10 @@ const emitFilter = (value: string) => emit('onFilter', value)
 
 <template>
   <ul class="flex mb-4">
-    <ProductListFilterItem v-for="category in categories"
-      :key="category.id" :category="category" @on-filter="emitFilter" />
+    <ProductListFilterItem
+      v-for="category in categories"
+      :key="category.id"
+      :category="category"
+      @on-filter="emitFilter" />
   </ul>
 </template>
