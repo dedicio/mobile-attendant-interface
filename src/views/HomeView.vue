@@ -16,13 +16,13 @@ const hasAdminPermission = computed(() => auth.user?.level === 'Administrador')
     <p class="mb-4">
         Comece a usar o sistema clicando em um dos botões abaixo:
     </p>
-    <Button
+    <!-- <Button
         label="Pedidos"
         theme="primary"
         full
         to="/orders"
         class="mb-2">
-    </Button>
+    </Button> -->
     <Button
         label="Mesas"
         theme="secondary"
