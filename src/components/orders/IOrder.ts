@@ -12,10 +12,12 @@ export interface IOrder {
   positionId: string,
   items?: IOrderItem[],
   status: Status
+  paymentMethod?: string,
 }
 
 export interface IOrderRequest {
   positionId: string,
   items?: IOrderItem[],
-  status: Status
+  status: Status,
+  paymentMethod?: string,
 }

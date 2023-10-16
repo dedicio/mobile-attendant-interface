@@ -7,7 +7,7 @@ import OrderEdit from '../components/orders/OrderEdit.vue'
 
 const route = useRoute()
 const title = computed(() => route.params.id ? 'Editar Pedido' : 'Novo Pedido')	
-const orderId = computed(() => `${route.params.id}`)
+const orderId = computed(() => route.params.id ? `${route.params.id}` : undefined)
 </script>
 
 <template>

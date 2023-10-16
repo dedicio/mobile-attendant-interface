@@ -7,11 +7,11 @@ const services = [
     url: '/positions',
     icon: '',
   },
-  {
-    label: 'Pedidos',
-    url: '/orders',
-    icon: '',
-  },
+  // {
+  //   label: 'Pedidos',
+  //   url: '/orders',
+  //   icon: '',
+  // },
   {
     label: 'Produtos',
     url: '/products',

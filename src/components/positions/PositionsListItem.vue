@@ -15,7 +15,7 @@ const isOpen = computed(() => props.position.order?.status === 'open')
 const editOrder = () => {
   const orderId = props.position.order?.orderId
   const url = orderId ? `/orders/${orderId}` : '/orders/new'
-  router.push(url)
+  router.push({ path: url })
 }
 </script>
 

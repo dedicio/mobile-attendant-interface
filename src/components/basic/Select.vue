@@ -33,9 +33,6 @@ const value = computed({
     v-model="value"
     class="bg-white border-blue rounded w-full border p-1">
     <option
-      disabled
-      :value="undefined">Selecione uma mesa</option>
-    <option
       v-for="option in options"
       :key="option.id"
       :value="option.id">

@@ -1,12 +1,13 @@
 <script setup lang='ts'>
 import { onMounted, reactive, computed } from 'vue';
 import { Store } from 'pinia';
+import { router } from '../../routes';
 import Field from '../basic/Field.vue'
 import FieldSelect from '../basic/FieldSelect.vue';
 import * as positionsApi from '../../utils/positionsApi';
 import { useOrdersStore, OrdersState, OrdersActions } from '../../stores/ordersStore';
 import { IOption } from '../basic/IOption';
-import { IOrderRequest } from './IOrder';
+import { IOrder } from './IOrder';
 import Button from '../basic/Button.vue';
 import ProductSelectOverlay from '../products/ProductSelectOverlay.vue';
 import OrderProductItem from './OrderProductItem.vue';
@@ -16,11 +17,19 @@ interface Props {
 }
 
 interface State {
-  order: IOrderRequest,
+  order: IOrder,
   position?: IOption,
   positions: IOption[],
   showModal: boolean,
+  paymentMethods: IOption[],
 }
+
+const paymentMethods = [
+  { id: 'money', label: 'Dinheiro' },
+  { id: 'credit_card', label: 'Cartão de crédito' },
+  { id: 'debit_card', label: 'Cartão de débito' },
+  { id: 'pix', label: 'Pix' },
+]
 
 const ordersStore: Store<'orders', OrdersState, {}, OrdersActions> = useOrdersStore()
 
@@ -28,12 +37,13 @@ const props = defineProps<Props>()
 
 const state: State = reactive({
   order: {
-    id: props.orderId,
+    id: props.orderId || '',
     positionId: '',
     status: 'open',
   },
   positions: [],
   showModal: false,
+  paymentMethods,
 })
 
 onMounted(async () => {
@@ -63,10 +73,20 @@ onMounted(async () => {
 
     state.positions = options;
   }
+
+  if (!state.order.id) {
+    state.order.id = ordersStore.getNewOrderId();
+    ordersStore.addOrder(state.order);
+  }
 });
 
 const hasProducts = computed(() => state.order.items && state.order.items?.length > 0)
 const toggleModal = () => state.showModal = !state.showModal
+
+const finishOrder = async () => {
+  await ordersStore.closeOrder(state.order);  
+  router.push({ path: '/positions' });
+}
 </script>
 
 <template>
@@ -99,15 +119,24 @@ const toggleModal = () => state.showModal = !state.showModal
       <div
         v-if="hasProducts"
         class="py-2">
+        <div>
+          <FieldSelect
+            v-model="state.order.paymentMethod"
+            :options="state.paymentMethods"
+            label="Selecione o método de pagamento" />
+        </div>
+
         <Button
           label="Fechar pedido"
           theme="primary"
-          full></Button>
+          full
+          @click="finishOrder"></Button>
       </div>
     </div>
   </section>
   <ProductSelectOverlay
     v-if="state.showModal"
-    :order-id="props.orderId"
-    @close="toggleModal" />
+    :order-id="state.order.id"
+    @close="toggleModal"
+    @save="toggleModal" />
 </template>

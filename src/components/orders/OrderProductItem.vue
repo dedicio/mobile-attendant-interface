@@ -7,18 +7,11 @@ interface Props {
   item: IOrderItem
 }
 
-interface Emits {
-  (e: 'itemUpdated', value: IOrderItem): void
-}
-
 const props = defineProps<Props>()
-const emit = defineEmits<Emits>()
 
 const currencyPrice = computed(() => {
   return currency.formatCurrency(props.item.price)
 })
-
-const updateItem = () => emit('itemUpdated', props.item)
 </script>
 
 <template>
@@ -29,11 +22,7 @@ const updateItem = () => emit('itemUpdated', props.item)
     </div>
     <div class="col-span-1 text-right flex justify-between">
       <span class="text-2xl block">{{ currencyPrice }}</span>
-      <button class="mt-2" @click.stop="updateItem">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      </button>
+      <span class="text-2xl">{{ item.quantity }}</span>
     </div>
   </div>
 </template>

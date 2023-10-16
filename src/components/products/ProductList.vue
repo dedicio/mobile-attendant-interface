@@ -29,7 +29,7 @@ const filter = (value: string) => console.log(value);
     <Loading></Loading>
   </div>
   <template v-else>
-    <ProductListFilter :categories="categories" @on-filter="filter" />
+    <!-- <ProductListFilter :categories="categories" @on-filter="filter" /> -->
     <div>
       <ProductListItem
         v-for="product in products"
